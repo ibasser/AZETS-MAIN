@@ -1,0 +1,60 @@
+<template>
+    <template if:true={page1}>
+        <div class="slds-align_absolute-center slds-m-vertical_large">
+            <lightning-input label="High risk" variant='brand' value={isHighRisk} type='checkbox'></lightning-input>
+            <lightning-button label='Next' onclick={nextPage}></lightning-button>
+        </div>
+    </template>
+    <template if:true={page2}>
+        <div class="slds-align_absolute-center slds-m-vertical_large">
+            <div>
+            <p>SmartSearch has found one or more possible results for your search.</p>
+            <p><lightning-button label='Run due diligence' onclick={nextPage}></lightning-button></p>
+            </div>
+        </div>
+    </template>
+    <template if:true={page3}>
+        <h1>Select your clients from the list</h1>
+        <template for:each={dueDiligenceList} for:item=dueDiligence >
+            <lightning-layout key={dueDiligence.DDID}>
+                <lightning-layout-item size=1><lightning-input type='checkbox' ></lightning-input></lightning-layout-item>
+                <lightning-layout-item size=3>{dueDiligence.name}</lightning-layout-item>
+                <lightning-layout-item size=2><lightning-button label='View' onclick={displayDDID} ></lightning-button></lightning-layout-item>
+            </lightning-layout>             
+        </template>
+        <div class="slds-align_absolute-center slds-m-vertical_large">
+            <lightning-button label='Update Due Diligence' onclick={nextPage} ></lightning-button>
+        </div>
+        <div class="slds-align_absolute-center slds-m-vertical_large">
+            {closeLabel}
+        </div>
+        <!--
+        <template if:true={waiting}>
+            <lightning-spinner
+                variant="brand"
+                size="large">
+            </lightning-spinner>
+        </template>
+        -->
+    </template>
+
+    <template if:true={page4} >
+            <lightning-input label="Has Due Diligence" variant='brand' checked type='checkbox'></lightning-input>
+            <lightning-input label="Has High Risk Due Diligence" variant='brand' checked type='checkbox'></lightning-input>
+        </br>
+            <lightning-input label="PEP" variant='brand' checked type='checkbox'></lightning-input>
+            <lightning-input label="HM Treasury" variant='brand'  type='checkbox'></lightning-input>
+            <lightning-input label="Special Interest Person" variant='brand'  type='checkbox'></lightning-input>
+            <lightning-input label="Worldwide Sanctions" variant='brand' checked type='checkbox'></lightning-input>
+
+        
+        <div class="slds-align_absolute-center slds-m-vertical_large">
+            <lightning-button label='SAVE AML' onclick={nextPage} ></lightning-button>
+        </div>
+
+    </template>
+
+    <template if:true={page5}>
+        <p> Success or error mesage</p>
+    </template>
+</template>

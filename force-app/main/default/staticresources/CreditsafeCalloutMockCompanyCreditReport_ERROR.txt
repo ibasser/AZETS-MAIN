@@ -1,0 +1,5 @@
+{
+    "correlationId": "20184d10-364c-11eb-b4d2-0264ffd6f4df",
+    "details": "Invalid companyId",
+    "message": "Bad Request"
+}

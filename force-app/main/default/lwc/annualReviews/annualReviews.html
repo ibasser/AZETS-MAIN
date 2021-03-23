@@ -1,0 +1,102 @@
+<template>
+    <lightning-card>
+        
+            <template if:true={page1}>
+                <div class="slds-align_absolute-center" style="font-size: 20px;" slot="title">
+                    <h1><b>Annual Reviews Due - {totalReviews}</b></h1>
+                </div>
+                <br>
+                <div class="slds-scrollable_y" style="height:15rem;width:22rem; padding-left: 15px">
+                    <template for:each={annualReviewsList} for:item="review" for:index="index">
+                        <ul key={review.id}>
+                            <li><b>Record Type:</b> {review.RecordTypeName}</li>
+                            <li><b>Account Name:</b> {review.accountName}</li>
+                            <li><b>Due Date: </b> <lightning-formatted-date-time value={review.nextReviewDate} year="numeric" month="2-digit" day="2-digit"></lightning-formatted-date-time></li>
+                            <li>
+                                <b>Due Status:  </b>  
+                                <template if:true={review.successFlag}>
+                                    <lightning-icon size="x-small" variant="success" icon-name="utility:priority" alternative-text="Future" title="Future"></lightning-icon>
+                                </template>
+                                <template if:true={review.warningFlag}>
+                                    <lightning-icon size="x-small" variant="warning" icon-name="utility:priority" alternative-text="Present" title="Present"></lightning-icon>
+                                </template>
+                                <template if:true={review.errorFlag}>
+                                    <lightning-icon size="x-small" variant="error" icon-name="utility:priority" alternative-text="Past" title="Past"></lightning-icon>
+                                </template>
+                            </li>
+                            <li>
+                                <template if:true={review.annualReviewRT}>
+                                    <lightning-button icon-name="action:preview" label='Review' onclick={editDetails} data-id={review.Id} ></lightning-button>
+                                </template>
+                                <template if:false={review.annualReviewRT}>
+                                    <lightning-button icon-name="action:record" label='Go To Record' onclick={viewRecord} data-id={review.Id} ></lightning-button>
+                                </template>
+                            </li>
+                            <br>
+                        </ul>
+                        
+                    </template>
+                </div>
+            </template>
+
+            <template if:true={page2}>
+                <div class="slds-align_absolute-center" style="font-size: 20px;" slot="title">
+                    <h1><b>Record Edit Form</b></h1>
+                </div>
+                <br>
+                <lightning-record-edit-form record-id={annualReviewRecordId}
+                                            object-api-name="Annual_Review__c"
+                                            onload={handleLoad}
+                                            onsubmit={handleSave}
+                                            onsuccess={handleSuccess}
+                                            onerror={handleError}>
+                    <lightning-messages>
+                    </lightning-messages>
+
+                    <label for="arName">Recurring ongoing monitoring review</label>
+                    <lightning-output-field id="arName" name="arName" field-name="Name" variant="label-hidden"></lightning-output-field>
+                    <br>
+
+                    <label for="question1">Is this still an active client?</label>
+                    <lightning-input-field id="question1" name="question1" field-name="Is_this_still_an_active_client__c" onchange={handleChange} variant="label-hidden">
+                    </lightning-input-field>
+                    <br>
+
+                    <label for="question2">Have we had contact with the client since the last review?</label>
+                    <lightning-input-field id="question2" name="question2" field-name="Contacted_Client_in_the_last_12_months__c" onchange={handleChange} variant="label-hidden">
+                    </lightning-input-field>
+                    <br>
+
+                    <label for="question3">Have we adding new services since the last review?</label>
+                    <lightning-input-field id="question3" name="question3" field-name="Any_new_services_for__c" onchange={handleChange} variant="label-hidden">
+                    </lightning-input-field>
+                    <br>
+
+                    <label for="question4">Has the Anti Money Laundering risk assessment for this client changed since the last review?</label>
+                    <lightning-input-field id="question4" name="question4" field-name="Changes_in_AML_last_12_months__c" onchange={handleChange} variant="label-hidden">
+                    </lightning-input-field>
+                    <br>
+
+                    <label for="question5">Are you aware that client due diligence information has changed since it was last recorded?</label>
+                    <lightning-input-field id="question5" name="question5" field-name="Any_changes_to_client_due_diligence__c" onchange={handleChange} variant="label-hidden">
+                    </lightning-input-field>
+                    <br>
+
+                    <label for="question6">Having considered the questions above there are no changes to record</label>
+                    <lightning-input-field id="question6" name="question6" type="checkbox" field-name="No_changes_to_record__c" onchange={handleChange} variant="label-hidden">
+                    </lightning-input-field>
+                    <br>
+
+                    <label for="question7">Having considered the questions above, there are changes to record and all required actions have been taken</label>
+                    <lightning-input-field id="question7" name="question7" field-name="Changes_to_record_and_checks_re_run__c" onchange={handleChange} variant="label-hidden">
+                    </lightning-input-field>
+                    <br>
+
+                    <lightning-button class="slds-m-top_small" variant="brand" type="submit" name="save" label="Save" onclick={setButtonType} data-id="save"></lightning-button>
+                    <lightning-button class="slds-m-top_small" label="Cancel" onclick={handleReset}></lightning-button>
+                    <lightning-button class="slds-m-top_small" variant="brand" type="submit" name="complete" disabled={submitDisabled} label="Complete Review" onclick={setButtonType} data-id="complete"></lightning-button>
+                    <lightning-button class="slds-m-top_small" label="Back" onclick={toPage1}></lightning-button>
+                </lightning-record-edit-form>
+            </template>
+    </lightning-card>
+  </template>

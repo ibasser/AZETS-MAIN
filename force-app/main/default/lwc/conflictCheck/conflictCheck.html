@@ -1,0 +1,102 @@
+<!--
+  @description       : Independent component to create Conflict Checks and display results to the user
+  @author            : Bluewave | Tomasz Piechota
+  @group             :
+  @last modified on  : 29-01-2021
+  @last modified by  : Bluewave | Tomasz Piechota
+  Modifications Log
+  Ver   Date         Author                       Modification
+  1.0   14-01-2021   Bluewave | Tomasz Piechota   Initial Version
+-->
+<template>
+  <template if:true={showConflictCheck}>
+  <!-- <lightning-card>
+    <h3 slot="title">
+      <lightning-icon icon-name="utility:connected_apps" size="x-small"></lightning-icon>
+      &nbsp;Conflict Check
+    </h3> -->
+      <template if:true={isDebugMode}>
+        <div class="slds-text-title_caps slds-text-align_center">Debug Mode</div>
+        <div class="slds-text-body_x-small slds-text-align_center">
+          Record Id: {recordId}<br/>
+          Account Id: {accountId}<br/>
+          sObjectName: {sObjectName}<br/>
+          oName: {oName}<br/>
+          companyDataExist: {companyDataExist}
+        </div>
+        <hr/>
+      </template>
+
+      <template if:true={isLoadingCD}>
+        <div class="slds-is-relative slds-p-vertical_medium">
+          <lightning-spinner size="small" variant="brand" alternative-text="Conflict Check in progress, please wait."></lightning-spinner>
+        </div>
+        <p class="slds-text-body_small slds-text-align_center">Checking if company data exist, please wait...</p>
+      </template>
+
+      <template if:false={isLoadingCD}>
+        <template if:false={companyDataExist}>
+          <p class="slds-text-body_small slds-text-align_center">No company data. Please update company data first.</p>
+        </template>
+
+        <template if:true={isLoadingCC}>
+          <template if:true={companyDataExist}>
+            <div class="slds-is-relative slds-p-vertical_medium">
+              <lightning-spinner size="small" variant="brand" alternative-text="Conflict Check in progress, please wait."></lightning-spinner>
+            </div>
+            <p class="slds-text-body_small slds-text-align_center">Conflict Check in progress, please wait...</p>
+          </template>
+        </template>
+      </template>
+
+      <template if:false={isLoadingCC}>
+        <!-- CONFLICT CHECK RESULTS -->
+        <template if:true={conflictCheckRetrieved}>
+          <div class="slds-p-around_medium slds-button_stretch">
+            <p class="slds-m-top_medium slds-m-bottom_medium slds-text-heading_small">
+                Conflict Check results.
+            </p>
+            <div class="slds-button_stretch">
+              <template for:each={conflictCheckRecords} for:item="cc">
+                <div key={cc.key} class={cc.messageClass}>
+                  <div class="slds-grid slds-nowrap">
+                    <div class="slds-col slds-button_stretch">
+                      <lightning-button
+                        label={cc.message}
+                        title={cc.sourceCompanyData.RecordType.Name}
+                        data-id={cc.sourceCompanyData.Id}
+                        onclick={navigateToRecordPage}
+                        class="btn-view slds-button_stretch slds-m-right_medium"
+                      ></lightning-button>
+                    </div>
+                    <!-- <div class="slds-col"> -->
+                      <!-- {cc.message}&nbsp; -->
+                      <!-- <lightning-icon icon-name={cc.iconName} alternative-text="Error!" variant={cc.variant} title={cc.message} size="xx-small"></lightning-icon> -->
+                    <!-- </div> -->
+                    <div class="slds-col slds-text-align_right">
+                      <lightning-button
+                        label="View"
+                        title="View all matching records"
+                        data-id={cc.sourceCompanyData.Id}
+                        onclick={navigateToRelatedList}
+                        class="btn-view slds-m-left_medium"
+                      ></lightning-button>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+            <div class="slds-button_stretch slds-m-top_small">
+              <lightning-button
+                label="View All Conflicts"
+                data-id={accountId}
+                onclick={navigateToRelatedList}
+                class="slds-button_stretch"
+              ></lightning-button>
+            </div>
+          </div>
+        </template>
+      </template>
+    <!-- </lightning-card> -->
+    </template>
+</template>

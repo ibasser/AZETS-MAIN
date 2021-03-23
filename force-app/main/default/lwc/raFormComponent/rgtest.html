@@ -1,0 +1,21 @@
+<template>
+    <fieldset class="slds-form-element slds-has-error">
+        <legend class="slds-form-element__legend slds-form-element__label">
+            <abbr class="slds-required" title="required">*</abbr>{label}
+            <lightning-helptext content="You'll receive weekly updates"></lightning-helptext>
+        </legend>
+        <div class="slds-form-element__control">
+            <div class="slds-radio_button-group">
+                <template for:each={options} for:item="o">
+                    <span key={o.value} class="slds-button slds-radio_button">
+                        <input type="radio" name={name} value={o.value} />
+                        <label class="slds-radio_button__label" for="example-unique-id-129">
+                            <span class="slds-radio_faux">{o.label}</span>
+                        </label>
+                    </span>
+                </template>
+            </div>
+            <!-- <div id="error-unique-id-128" class="slds-form-element__help">This field is required</div> -->
+        </div>
+    </fieldset>
+</template>

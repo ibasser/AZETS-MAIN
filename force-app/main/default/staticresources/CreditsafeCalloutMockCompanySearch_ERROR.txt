@@ -1,0 +1,5 @@
+{
+    "correlationId": "37136280-38b7-11eb-abaa-020fd0765c39",
+    "message": "Bad request",
+    "details": "Bad request"
+}

@@ -1,0 +1,109 @@
+{
+    "data": {
+        "id": "2729657",
+        "type": "aml",
+        "attributes": {
+            "ssid": "2729657",
+            "ssid_chain": [
+                "2729657"
+            ],
+            "client_ref": null,
+            "cra": "experian",
+            "risk_level": "normal",
+            "name": {
+                "title": "Miss",
+                "first": "Evalyn",
+                "middle": "Katherine",
+                "last": "Croft"
+            },
+            "date_of_birth": "1988-12-26",
+            "contacts": {
+                "telephone_std": null,
+                "telephone": null,
+                "mobile": null,
+                "email": null
+            },
+            "addresses": [
+                {
+                    "full": "43 Midway Lane, Franklin, CA, 46892",
+                    "flat": "",
+                    "building": "Midway Lane",
+                    "street_1": "43 Midway Lane",
+                    "street_2": "",
+                    "town": "Franklin",
+                    "region": "",
+					"state": "CA",
+                    "postcode": "46892",
+                    "duration": 3,
+                    "country": "USA"
+                }
+            ],
+            "result": "refer",
+            "number_of_primary_checks": null,
+            "granular_data": [],
+            "number_of_primary_sources": null,
+            "number_of_collaborative_checks": null,
+            "number_of_collaborative_sources": null,
+            "authentication_index": {
+                "value": null,
+                "message": "No electronic data has been found to identify this individual"
+            },
+            "name_and_address_match": "fail",
+            "identity_confirmation_level": "fail",
+            "paf_confirmation": "pass",
+            "oldest_primary_data": null,
+            "oldest_collaborative_data": null,
+            "dob_match_primary": null,
+            "dob_match_collaborative": null,
+            "mobile_number_validation": null,
+            "email_address_validation": null,
+            "bank_account_match": null,
+            "bank_card_validation": null,
+            "driving_licence_number_verification": null,
+            "national_insurance_number_validation": null,
+            "passport_number_validation": null,
+            "deceased_check": "pass",
+            "potential_fraud_alert": "pass",
+            "bank": null,
+            "documents": null,
+            "due_diligence": {
+                "monitoring": {
+                    "active": true,
+                    "frequency": "Daily",
+                    "last_monitored": "2021-02-17 14:19:31"
+                },
+                "sanction_region": "gbr",
+                "has_due_diligence": true,
+                "has_outstanding_due_diligence": true,
+                "has_highrisk_due_diligence": false,
+                "worldwide_sanctions": "pass",
+                "hmt_ofacs": null,
+                "hm_treasury": null,
+                "ofacs_sanctions": null,
+                "politically_exposed_person": "fail",
+                "special_interest_person": null,
+                "relative_close_associate": null,
+                "special_interest_entity": null
+            }
+        },
+        "links": {
+            "self": "https://sandbox-api.smartsearchsecure.com/aml/2729657",
+            "monitoring": "https://sandbox-api.smartsearchsecure.com/aml/2729657/monitoring",
+            "due_diligence": "https://sandbox-api.smartsearchsecure.com/due_diligence/2729657",
+            "pdf": {
+                "href": "https://sandbox-api.smartsearchsecure.com/export/2729657/pdf-download?expires=1613572471&signature=fcc2b7f6d80f03fed3fa824f440667e7c2276346efcc250744c382fedffb869f",
+                "meta": {
+                    "expires_in": 900
+                }
+            },
+            "pdf-base64": "https://sandbox-api.smartsearchsecure.com/export/2729657/pdf-base64"
+        }
+    },
+    "meta": {
+        "reference": "a94bf7b2-87ae-4c26-a4de-71f0ff63c326",
+        "timestamp": "2021-02-17T14:19:31+00:00",
+        "duration": 3.011,
+        "version": "2.2.1",
+        "notices": []
+    }
+}

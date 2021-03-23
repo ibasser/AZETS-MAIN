@@ -1,0 +1,59 @@
+<!--
+  @description       :
+  @author            : Bluewave | Tomasz Piechota
+  @group             :
+  @last modified on  : 02-03-2021
+  @last modified by  : Bluewave | Tomasz Piechota
+  Modifications Log
+  Ver   Date         Author                       Modification
+  1.0   08-02-2021   Bluewave | Tomasz Piechota   Initial Version
+-->
+<template>
+    <lightning-card if:true={debugMode}>
+        <p slot="title" class="slds-theme_error slds-p-horizontal_xx-small">DEBUG MODE</p>
+        <div class="slds-p-around_medium bg-color_white slds-text-body_small">
+            <strong>recordId:&nbsp;</strong>{parsedInitData.sObjectId}<br/>
+            <strong>init obj:&nbsp;</strong>{parsedInitData.sObjectType}<br/>
+            <strong>action:&nbsp;</strong>{action}<br/>
+            <strong>RiskAssessment Id (progress):&nbsp;</strong>{parsedInitData.raInProgress}<br/>
+            <strong>RiskAssessment Id: (approval)&nbsp;</strong>{parsedInitData.raPendingApproval}<br/>
+            <strong>counterparties:&nbsp;</strong>{ifCounterpartiesExist}<br/>
+            <strong>Step:&nbsp;</strong>{currentStep}<br/>
+            <strong>Step Label:&nbsp;</strong>{currentStepLabel}
+            <strong>isUpdateReload:&nbsp;</strong>{isUpdateReload}
+        </div>
+    </lightning-card>
+    <template if:true={isSaving}>
+        <lightning-spinner alternative-text="Saving Risk Assessment" size="large" variant="brand"></lightning-spinner>
+    </template>
+    <div class="slds-box slds-box_small bg-color_white">
+        <c-ra-progress-indicator steps={steps} onsetcurrentsteplabel={setCurrentStepLabel}></c-ra-progress-indicator>
+    </div>
+    <lightning-card>
+        <p slot="title">{currentStepLabel}</p>
+        <lightning-button label="Save" slot="actions" onclick={handleSaveProgress} variant="brand"></lightning-button>
+        <div class="slds-p-horizontal_small">
+            <lightning-layout multiple-rows>
+                <template for:each={questionlists} for:item="q">
+                    <lightning-layout-item key={q.definition.Id} size="12" padding="around-small">
+                        <c-ra-form-component is-update-reload={isUpdateReload} input-type={q.definition.Field_Type__c} question-package={q} question-definition={q.definition} debug-mode={debugMode} onfieldupdate={handleFieldUpdate}></c-ra-form-component>
+                    </lightning-layout-item>
+                    <!-- <c-ra-wizard-pagination ></c-ra-wizard-pagination> -->
+                </template>
+            </lightning-layout>
+        </div>
+        <div slot="footer" class="slds-modal_footer">
+            <lightning-layout horizontal-align="spread">
+                <lightning-layout-item>
+                    <lightning-button variant="brand" label="Previous" title="Previous" onclick={handlePrevious} disabled={isFirstStep}></lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item if:false={isLastStep}>
+                    <lightning-button variant="brand" label="Next" title="Next" onclick={handleNext} disabled={isLastStep}></lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item if:true={isLastStep}>
+                    <lightning-button variant="brand" label="Submit" title="Submit" onclick={handleSubmit}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </lightning-card>
+</template>

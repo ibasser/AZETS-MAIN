@@ -1,0 +1,16 @@
+<template>
+    <div class="debug-info slds-m-top_x-small">
+        <span class="slds-badge slds-badge_inverse slds-theme_error debug-badge slds-m-right_medium">
+            <span class="slds-badge__icon slds-badge__icon_left slds-badge__icon_inverse slds-p-right_xx-small debug-badge">
+                <span class="slds-icon_container slds-icon-utility-moneybag slds-current-color" title="Description of icon when needed">
+                    <lightning-icon icon-name="utility:bug" alternative-text="Debug Mode" size="xx-small" title="Debug"></lightning-icon>
+                </span>
+            </span>
+            <span class="debug-content">DEBUG</span>
+        </span>
+        <span class="debug-content slds-text-body_small slds-p-left_small">
+            <p>Selected values are: {selected}</p>
+            <p>Has Child Questions: {hasChildQuestions}</p>
+        </span>
+    </div>
+</template>

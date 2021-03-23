@@ -1,0 +1,21 @@
+.debug-badge {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.55rem;
+    border-radius: 0;
+}
+
+.debug-info {
+    border: 2px solid rgb(194, 57, 52);
+}
+
+.debug-info .slds-badge {
+    padding: .1rem .3rem .1rem;
+    border-width: 3px;
+}
+
+.debug-info .debug-badge,
+.debug-info .debug-content {
+    display: table-cell;
+    vertical-align: middle;
+}

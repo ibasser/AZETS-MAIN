@@ -1,0 +1,33 @@
+<!--
+  @description       :
+  @author            : Bluewave | Tomasz Piechota
+  @group             :
+  @last modified on  : 28-01-2021
+  @last modified by  : Bluewave | Tomasz Piechota
+  Modifications Log
+  Ver   Date         Author                       Modification
+  1.0   11-03-2020   Bluewave | Tomasz Piechota   Initial Version
+-->
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+    <!-- Remove the white background by applying custom CSS so we can add LWC easily. -->
+    <aura:html tag="style">
+        .modal-container.slds-modal__container {
+            width: 65%;
+            max-width: 60rem;
+        }
+        .cuf-content {
+            padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+            padding: 0rem !important;
+        }
+        .slds-modal__content{
+            overflow-y:hidden !important;
+            height:unset !important;
+            max-height:unset !important;
+        }
+    </aura:html>
+
+    <!-- Load LWC & pass record Id -->
+    <c:updateCompanyData onclose="{!c.closeMethodInAuraController}" recordId="{!v.recordId}"/>
+</aura:component>

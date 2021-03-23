@@ -1,0 +1,11 @@
+.tableCell{
+    width:40%; 
+    padding-left: 10px;
+    border: 1px solid rgb(110, 110, 253);
+}
+
+td{
+    width:40%; 
+    padding-left: 10px;
+    border: 1px solid green;
+}

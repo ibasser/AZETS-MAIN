@@ -1,0 +1,201 @@
+<template>
+    <!-- BADGE/RISK SUB-AREA -->
+    <div class="ra-badge_wrapper" if:true={hasRiskSubArea}>
+        <lightning-badge label={riskSubArea} class="ra-badge_sub-area"></lightning-badge>
+    </div>
+
+    <!-- QUESTION -->
+    <div class="slds-is-relative">
+        <!-- QUESTION LABEL + HELP TEXT -->
+        <div class="slds-form-element">
+            <fieldset>
+                <legend class="slds-form-element__legend slds-form-element__label">
+                    <abbr title="required" class="slds-required" if:true={questionDefinition.Field_Required__c}>*</abbr>
+                    <lightning-formatted-rich-text value={label}></lightning-formatted-rich-text>
+                    <lightning-helptext content={fieldLevelHelp} class="ra-question_helptext slds-m-left_xx-small" if:true={hasFieldLevelHelp}></lightning-helptext>
+                </legend>
+            </fieldset>
+        </div>
+
+        <!-- QUESTION INPUT FIELD -->
+        <lightning-radio-group
+            name={name}
+            label={label}
+            options={options}
+            value={fieldValue}
+            required={questionDefinition.Field_Required__c}
+            disabled={disabled}
+            variant="label-hidden"
+            type={type}
+            onchange={handleInputRadioGroupChange}
+            data-set-param={q.Set_Param__c}
+            pattern="url"
+            class={raQuestionClass}>
+        </lightning-radio-group>
+
+        <!-- DEBUG INFO -->
+        <template if:true={debugMode}>
+            <c-ra-form-field-debug selected={selected} has-children={hasChildQuestions} show-child-field={showChildQuestion}></c-ra-form-field-debug>
+        </template>
+
+        <!-- DETAIL SECTION -->
+        <template if:true={showAddDetails}>
+            <!-- QUESTION -->
+            <div class="slds-is-relative">
+                <!-- DETAIL FIELD LABEL + HELP TEXT -->
+                <div class="slds-form-element">
+                    <fieldset>
+                        <legend class="slds-form-element__legend slds-form-element__label detail-question_label">
+                            <abbr title="required" class="slds-required" if:true={questionDefinition.Detail_Field_Required__c}>*</abbr>
+                            <lightning-formatted-rich-text value={detailFieldLabel}></lightning-formatted-rich-text>
+                            <!-- <lightning-helptext content={fieldLevelHelp} class="ra-question_helptext slds-m-left_xx-small" if:true={hasFieldLevelHelp}></lightning-helptext> -->
+                            <lightning-helptext content={detailFieldHelptext} class="detail-question_helptext slds-m-left_xx-small" if:true={hasDetailFieldLevelHelp}></lightning-helptext>
+                        </legend>
+                    </fieldset>
+                </div>
+
+                <!-- TEXT -->
+                <template if:true={isDetailFieldText}>
+                    <lightning-input
+                        data-fieldtype={detailFieldType}
+                        data-is-detail-field="true"
+                        type="text"
+                        name={detailFieldName}
+                        label={detailFieldLabel}
+                        value={detailFieldValue}
+                        variant="label-hidden"
+                        required={questionDefinition.Detail_Field_Required__c}
+                        onblur={handleTextFieldChange}
+                        class={detailQuestionClass}>
+                    </lightning-input>
+                    <!-- DEBUG INFO -->
+                    <template if:true={debugMode}>
+                        <c-ra-form-field-debug selected={selectedDetail} ></c-ra-form-field-debug>
+                    </template>
+                </template>
+
+                <!-- NUMBER -->
+                <template if:true={isDetailFieldNumber}>
+                    <lightning-input
+                        data-fieldtype={detailFieldType}
+                        data-is-detail-field="true"
+                        placeholder={detailFieldPlaceholder}
+                        type="number"
+                        name={detailFieldName}
+                        label={detailFieldLabel}
+                        value={detailFieldValue}
+                        formatter={detailFieldFormatter}
+                        variant="label-hidden"
+                        required={questionDefinition.Detail_Field_Required__c}
+                        onblur={handleNumberFieldChange}
+                        step={detailFieldStep}
+                        class={detailQuestionClass}>
+                    </lightning-input>
+                    <!-- DEBUG INFO -->
+                    <template if:true={debugMode}>
+                        <c-ra-form-field-debug selected={selectedDetail} ></c-ra-form-field-debug>
+                    </template>
+                </template>
+
+                <!-- RADIO-GROUP -->
+                <template if:true={isDetailFieldRadioButton}>
+                    <lightning-radio-group
+                        data-fieldtype={detailFieldType}
+                        data-is-detail-field="true"
+                        name={detailFieldName}
+                        label={detailFieldLabel}
+                        options={detailFieldOptions}
+                        value={detailFieldValue}
+                        required={isDetailFieldRequired}
+                        variant="label-hidden"
+                        type="button"
+                        onchange={handleInputRadioGroupChange}
+                        class={detailQuestionClass}>
+                    </lightning-radio-group>
+                    <!-- DEBUG INFO -->
+                    <template if:true={debugMode}>
+                        <c-ra-form-field-debug selected={selectedDetail} ></c-ra-form-field-debug>
+                    </template>
+                </template>
+
+                <!-- TEXT-AREA -->
+                <template if:true={isDetailFieldTextArea}>
+                    <lightning-textarea
+                        data-fieldtype={detailFieldType}
+                        data-is-detail-field="true"
+                        name={detailFieldName}
+                        label={detailFieldLabel}
+                        required={isDetailFieldRequired}
+                        onblur={handleTextFieldChange}
+                        variant="label-hidden"
+                        value={detailFieldValue}
+                        class={detailQuestionClass}>
+                    </lightning-textarea>
+                    <!-- DEBUG INFO -->
+                    <template if:true={debugMode}>
+                        <c-ra-form-field-debug selected={selectedDetail} ></c-ra-form-field-debug>
+                    </template>
+                </template>
+
+                <!-- COMBOBOX -->
+                <template if:true={isDetailFieldCombobox}>
+                    <lightning-combobox
+                        data-fieldtype={detailFieldType}
+                        data-is-detail-field="true"
+                        dropdown-alignment={dropdownAlignment}
+                        label={detailFieldLabel}
+                        name={detailFieldName}
+                        options={detailFieldOptions}
+                        value={detailFieldValue}
+                        required={isDetailFieldRequired}
+                        onchange={handleInputComboboxChange}
+                        variant="label-hidden"
+                        class={detailQuestionClass}>
+                    </lightning-combobox>
+                    <!-- DEBUG INFO -->
+                    <template if:true={debugMode}>
+                        <c-ra-form-field-debug selected={selectedDetail} ></c-ra-form-field-debug>
+                    </template>
+                </template>
+
+                <!-- DUAL-LISTBOX -->
+                <template if:true={isDetailFieldDualListbox}>
+                    <lightning-dual-listbox
+                        data-fieldtype={detailFieldType}
+                        data-is-detail-field="true"
+                        name={detailFieldName}
+                        label={detailFieldLabel}
+                        source-label="Available"
+                        selected-label="Selected"
+                        options={detailFieldOptions}
+                        onchange={handleInputDualListChange}
+                        variant="label-hidden"
+                        value={dualListDetailfieldValue}
+                        class={detailQuestionClass}>
+                    </lightning-dual-listbox>
+                    <!-- DEBUG INFO -->
+                    <template if:true={debugMode}>
+                        <c-ra-form-field-debug selected={selectedDetail} ></c-ra-form-field-debug>
+                    </template>
+                </template>
+
+                <!-- FILE -->
+                <template if:true={isDetailFieldFile}>FILE</template>
+
+                <!-- CHECKBOX -->
+                <template if:true={isDetailFieldCheckbox}>CHECKBOX</template>
+            </div>
+        </template>
+    </div>
+    <template if:true={showChildQuestion}>
+        <template for:each={childQuestionPackages} for:item="childPackage">
+            <div key={childPackage.Id} class="slds-p-top_small">
+                <c-ra-form-component input-type={childPackage.definition.Field_Type__c} question-package={childPackage} question-definition={childPackage.definition} debug-mode={debugMode} onfieldupdate={handleFieldUpdate}></c-ra-form-component>
+            </div>
+        </template>
+        <!-- Show only One question when using getFirstMatchingChildPackage
+        <div class="slds-p-top_small">
+            <c-ra-form-component input-type={childQuestionPackage.definition.Field_Type__c} question-package={childQuestionPackage} question-definition={childQuestionPackage.definition} debug-mode={debugMode} onfieldupdate={handleFieldUpdate}></c-ra-form-component>
+        </div> -->
+    </template>
+</template>

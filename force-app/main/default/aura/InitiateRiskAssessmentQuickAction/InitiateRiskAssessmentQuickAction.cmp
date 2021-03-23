@@ -1,0 +1,68 @@
+<!--
+  @description       :
+  @author            : Bluewave | Tomasz Piechota
+  @group             :
+  @last modified on  : 01-03-2021
+  @last modified by  : Bluewave | Tomasz Piechota
+  Modifications Log
+  Ver   Date         Author                       Modification
+  1.0   22-02-2021   Bluewave | Tomasz Piechota   Initial Version
+-->
+<aura:component controller="RiskAssessmentFormController" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+    <aura:html tag="style">
+        .slds-modal__content{
+            overflow-y:hidden !important;
+            height:unset !important;
+            max-height:unset !important;
+        }
+    </aura:html>
+
+    <!-- ATTRIBUTES -->
+    <aura:attribute name="initData" type="Object"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="sObjectId" type="String"/>
+    <aura:attribute name="sObjectType" type="String"/>
+    <aura:attribute name="raExist" type="Boolean" default="false"/>
+    <aura:attribute name="raInProgress" type="String"/>
+    <aura:attribute name="raInProgressExist" type="Boolean" default="false"/>
+    <aura:attribute name="raPendingApproval" type="String"/>
+    <aura:attribute name="raPendingApprovalExist" type="Boolean" default="false"/>
+
+    <!-- HANDLERS -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <!-- SERVICES -->
+    <lightning:navigation aura:id="navService"/>
+
+    <!-- CONTENT -->
+    <!-- recordId: {!v.recordId}<br/>
+    sObjectId: {!v.sObjectId}<br/>
+    sObjectType: {!v.sObjectType}<br/>
+    raExist: {!v.raExist}<br/>
+    raInProgress: {!v.raInProgress}<br/>
+    raInProgressExist: {!v.raInProgressExist}<br/>
+    raPendingApproval: {!v.raPendingApproval}<br/>
+    raPendingApprovalExist: {!v.raPendingApprovalExist} -->
+    <div class="slds-p-vertival_medium slds-is-relative">
+        <aura:if isTrue="{!and(v.raExist, v.raPendingApprovalExist)}">
+            <div class="slds-align_absolute-center">
+                <div class="slds-text-title_caps">You cannot start new Risk Assessment while there is one pending approval.</div>
+            </div>
+        </aura:if>
+
+        <aura:if isTrue="{!and(v.raExist, v.raInProgressExist)}">
+            <div class="slds-align_absolute-center">
+                <aura:if isTrue="{!v.sObjectType == 'Risk_Assessment__c'}">
+                    <div class="slds-text-title_caps slds-p-vertical_medium">This risk assessment is already In-Progress.</div>
+                    <aura:set attribute="else">
+                        <div class="slds-text-title_caps slds-p-vertical_medium">There already exists an In-Progress Risk Assessment.</div>
+                    </aura:set>
+                </aura:if>
+            </div>
+            <lightning:buttonGroup class="slds-button_stretch slds-p-vertical_medium">
+                <lightning:button class="slds-button_stretch slds-p-vertical_medium" variant="brand" iconName="utility:download" label="Load saved assessment" title="Load saved assessment" onclick="{! c.handleLoad }" />
+                <lightning:button class="slds-button_stretch slds-p-vertical_medium" variant="destructive" iconName="utility:refresh" label="Discard saved progress and start new" title="Discard existing and start new" onclick="{! c.handleNew }" />
+            </lightning:buttonGroup>
+        </aura:if>
+    </div>
+</aura:component>

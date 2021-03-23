@@ -1,0 +1,26 @@
+<!--
+  @description       : Dynamic progress bar/indicator
+  @author            : Bluewave | Tomasz Piechota
+  @group             :
+  @last modified on  : 08-02-2021
+  @last modified by  : Bluewave | Tomasz Piechota
+  Modifications Log
+  Ver   Date         Author                       Modification
+  1.0   08-02-2021   Bluewave | Tomasz Piechota   Initial Version
+-->
+<template>
+
+    <div class={wrapperClass}>
+        <lightning-progress-indicator current-step={currentStep} type={type} has-error={hasError} variant={variant}>
+            <template for:each={steps} for:item="step">
+                <lightning-progress-step label={step.label} value={step.value} key={step.label}></lightning-progress-step>
+            </template>
+            <lightning-progress-step label="All Done" value="alldone" class="slds-hide" if:true={allDone}></lightning-progress-step>
+        </lightning-progress-indicator>
+    </div>
+
+    <template if:true={showLabel}>
+        <div class="slds-text-title_caps slds-text-align_center slds-p-vertical_large">{currentStepLabel}</div>
+    </template>
+
+</template>

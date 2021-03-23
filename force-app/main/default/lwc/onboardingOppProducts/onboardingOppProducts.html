@@ -1,0 +1,50 @@
+<!--
+  @description       : Display Opportunity products
+  @author            : Bluewave | Tomasz Piechota
+  @group             : Bluewave
+  @last modified on  : 11-02-2021
+  @last modified by  : Bluewave | Tomasz Piechota
+  Modifications Log
+  Ver   Date         Author                       Modification
+  1.0   02-02-2021   Bluewave | Tomasz Piechota   Initial Version (Release 2.1)
+-->
+<template>
+    <article class="slds-card slds-card_boundary">
+        <div lst-listviewmanagerheader_listviewmanagerheader="" class={pageHeaderClass}>
+            <header class="slds-media slds-media--center slds-has-flexi-truncate">
+                <div class="slds-col slds-has-flexi-truncate firstHeaderRow">
+                    <div class="slds-media slds-no-space slds-grow">
+                        <span class="record-avatar-container slds-avatar slds-avatar_small icon slds-m-right_small">
+                            <lightning-icon icon-name="standard:product" alternative-text="Products" title="Products" size="small"></lightning-icon>
+                        </span>
+                        <div class="slds-media__body slds-align-middle">
+                            <h2 class="slds-card__header-title">
+                                <span class="slds-truncate slds-m-right--xx-small" title={headerTitle}>{headerTitle}</span>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-no-flex">
+                    <div>&nbsp;<!-- <button class="slds-button slds-button_neutral">New</button> --></div>
+                </div>
+            </header >
+        </div>
+        <template if:true={productsExist}>
+            <div class="slds-card__body slds-card__body_inner slds-p-around_none slds-m-around_none">
+                <lightning-datatable
+                    key-field="id"
+                    data={productsList}
+                    hide-checkbox-column
+                    columns={columns}>
+                </lightning-datatable>
+            </div>
+            <!-- <footer class="slds-card__footer slds-m-top_none slds-border-top_none"> -->
+                <!-- <lightning-button variant="base" label="View All" title="View All Products" onclick={navigateToRelatedList} class="slds-card__footer-action"></lightning-button> -->
+
+                <!-- <a class="slds-card__footer-action" href="#" onclick={navigateToRelatedList}>View All
+                    <span class="slds-assistive-text">Products</span>
+                </a> -->
+            <!-- </footer> -->
+        </template>
+    </article>
+</template>

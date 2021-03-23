@@ -1,0 +1,58 @@
+{
+    "data": {
+        "id": "0001234",
+        "type": "djo",
+        "attributes": {
+            "ssid": "0001234",
+            "ssid_chain": [
+                "0001234"
+            ],
+            "client_ref": "0012A00000BCdE3FGH",
+            "type": "business",
+            "company_name": "BW_Test1",
+            "company_group": null,
+            "crn": null,
+            "address": null,
+            "run_date": "2021-02-17",
+            "due_diligence": {
+                "monitoring": {
+                    "active": true,
+                    "frequency": "Daily",
+                    "last_monitored": "2021-02-17 09:33:20"
+                },
+                "sanction_region": "gbr",
+                "has_due_diligence": true,
+                "has_outstanding_due_diligence": true,
+                "has_highrisk_due_diligence": false,
+                "worldwide_sanctions": null,
+                "hmt_ofacs": null,
+                "hm_treasury": null,
+                "ofacs_sanctions": null,
+                "politically_exposed_person": null,
+                "special_interest_person": null,
+                "relative_close_associate": null,
+                "special_interest_entity": "fail"
+            }
+        },
+        "links": {
+            "self": "https://sandbox-api.smartsearchsecure.com/djo/0001234",
+            "due_diligence": "https://sandbox-api.smartsearchsecure.com/due_diligence/0001234",
+            "pdf": {
+                "href": "https://sandbox-api.smartsearchsecure.com/export/0001234/pdf-download?expires=1613555300&signature=f2ea844296385e84462ead3062981bff855c9cfe85e6fd4d767eb0b4e346bf03",
+                "meta": {
+                    "expires_in": 900
+                }
+            },
+            "pdf-base64": "https://sandbox-api.smartsearchsecure.com/export/0001234/pdf-base64"
+        }
+    },
+    "meta": {
+        "reference": "e02ac126-63f8-4dbe-9799-5361ee973888",
+        "timestamp": "2021-02-17T09:33:20+00:00",
+        "duration": 0.507,
+        "version": "2.2.1",
+        "notices": [
+            "Attribute postcode is not necessary and has been ignored."
+        ]
+    }
+}

@@ -1,0 +1,23 @@
+lightning-dual-listbox.ra-question.has-helptext .slds-form-element__label,
+lightning-radio-group.ra-question.has-helptext fieldset legend,
+lightning-combobox.ra-question.has-helptext label,
+lightning-textarea.ra-question.has-helptext label,
+lightning-input.ra-question.has-helptext label {
+    text-indent: 20px;
+}
+
+lightning-dual-listbox.detail-question.has-helptext .slds-form-element__label,
+lightning-radio-group.detail-question.has-helptext fieldset legend,
+lightning-combobox.detail-question.has-helptext label,
+lightning-textarea.detail-question.has-helptext label,
+lightning-input.detail-question.has-helptext label {
+    text-indent: 20px;
+}
+
+.ra-question .slds-form-element__label {
+    font-weight: bold;
+}
+
+lightning-helptext .slds-form-element__icon {
+    padding-top: 0;
+}

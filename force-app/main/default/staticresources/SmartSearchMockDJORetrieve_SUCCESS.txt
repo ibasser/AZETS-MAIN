@@ -1,0 +1,56 @@
+{
+    "data": {
+        "id": "2720942",
+        "type": "djo",
+        "attributes": {
+            "ssid": "2720942",
+            "ssid_chain": [
+                "2720942"
+            ],
+            "client_ref": "0013M00000GCaB4QAL",
+            "type": "business",
+            "company_name": "IBM",
+            "company_group": null,
+            "crn": null,
+            "address": null,
+            "run_date": "2021-01-25",
+            "due_diligence": {
+                "monitoring": {
+                    "active": true,
+                    "frequency": "Daily",
+                    "last_monitored": "2021-01-25 16:02:12"
+                },
+                "sanction_region": "gbr",
+                "has_due_diligence": true,
+                "has_outstanding_due_diligence": false,
+                "has_highrisk_due_diligence": true,
+                "worldwide_sanctions": null,
+                "hmt_ofacs": null,
+                "hm_treasury": null,
+                "ofacs_sanctions": null,
+                "politically_exposed_person": null,
+                "special_interest_person": null,
+                "relative_close_associate": null,
+                "special_interest_entity": "fail"
+            }
+        },
+        "links": {
+            "self": "https://sandbox-api.smartsearchsecure.com/djo/2720942",
+            "due_diligence": "https://sandbox-api.smartsearchsecure.com/due_diligence/2720942",
+            "pdf": {
+                "href": "https://sandbox-api.smartsearchsecure.com/export/2720942/pdf-download?expires=1613561121&signature=6fb9582787e1996da77a10da40d41eb1d955bd6cf82a76a5b41f018dca4649ed",
+                "meta": {
+                    "expires_in": 900
+                }
+            },
+            "pdf-base64": "https://sandbox-api.smartsearchsecure.com/export/2720942/pdf-base64"
+        }
+    },
+    "meta": {
+        "reference": "4036dce6-62e8-4b6b-9faa-b38478bcb68f",
+        "timestamp": "2021-02-17T11:10:21+00:00",
+        "duration": 0.128,
+        "version": "2.2.1",
+        "notices": []
+    }
+}

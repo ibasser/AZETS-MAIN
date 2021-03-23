@@ -1,0 +1,363 @@
+<template>
+    <template if:true={spinnerOn}>
+        <lightning-spinner alternative-text={spinnerText}></lightning-spinner>
+    </template>
+    <template if:true={dataAvailable}>
+        
+        <lightning-card >
+            <!--        START Page 1   -->   
+            <template if:true={page1}>
+                <!-- Buttons (pg1)-->
+                <div slot="footer">
+                    <template if:true={isCompany}>
+                        <lightning-button disabled={ssidNull} label='Retrieve existing' onclick={retrieveDjo} ></lightning-button>
+                        <lightning-button label='Run new' onclick={runDJO}></lightning-button>
+                    </template>           
+                    <template if:true={isPerson}>
+                        <lightning-button disabled={ssidNull} label='Retrieve existing AML' onclick={retrieveAML} ></lightning-button>
+                        <lightning-button disabled={cannotRunAML} label='Run new AML' onclick={runAML}></lightning-button>
+                    </template>
+                </div>
+
+                <!-- title (pg1)  -->
+                <div  slot="title">
+                    <template if:true={isCompany}>
+                        Account Information
+                    </template>
+                    <template if:true={isPerson}>
+                        Personal Information
+                    </template>
+                </div>
+
+                
+                <!--      DATA    -->
+                <lightning-layout horizontal-align="center" >
+                    <lightning-layout-item size="6">
+                        <div style="height:27rem;" class="slds-p-vertical_medium">
+                            <template if:true={isCompany}>
+                                <!--  COMPANY - ACCOUNT -->
+                                <template if:true={isAccount}>
+                                    <table>
+                                        <tr><td>Account Name</td><td>{account.Name}</td></tr>
+                                        <tr><td>SSID</td><td>{account.SSID__c}</td></tr>
+                                        <tr><td>Trading Address</td><td> <lightning-formatted-address
+                                            street={account.BillingStreet}
+                                            city={account.BillingCity}
+                                            country={account.BillingCountry}
+                                            province={account.BillingState}
+                                            postal-code={account.BillingPostalCode}
+                                        ></lightning-formatted-address></td></tr>
+                                        <tr><td>Registered Address</td><td><lightning-formatted-address
+                                            street={account.ShippingStreet}
+                                            city={account.ShippingCity}
+                                            country={account.ShippingCountry}
+                                            province={account.ShippingState}
+                                            postal-code={account.ShippingPostalCode}
+                                        ></lightning-formatted-address></td></tr>
+                                    </table>
+
+                                </template>
+
+                                <!--  COMPANY - COMPANY_DATA__c -->
+                                <template if:false={isAccount}>
+                                    <table>
+                                        <tr><td>Company Name</td><td>{companyData.Company_Name__c}</td></tr>
+                                        <tr><td>SSID</td><td>{companyData.SSID__c}</td></tr>
+                                    </table>
+                                </template>
+                            </template>
+                            <!-- End Company/Account Section-->
+                            
+                            <!--  PERSON DATA-->
+                            <template if:true={isPerson}>
+                                <table>
+                                    <tr><td>Title</td><td>{personData.Title__c}</td></tr>
+                                    <tr><td>First Name</td><td>{personData.First_Name__c}</td></tr>
+                                    <tr><td>Last Name</td><td>{personData.Last_Name__c}</td></tr>
+                                    <tr><td>Address</td><td><lightning-formatted-address
+                                        street={personData.Address_Street_1__c}
+                                        city={personData.Address_Town__c}
+                                        country={personData.Country__c}
+                                        province={personData.Address_State__c}
+                                        postal-code={personData.Address_Postcode__c}
+                                    ></lightning-formatted-address></td></tr>
+
+                                </table>
+                            </template>
+                            <template if:true={highRiskAllowed}>
+                                <div class="slds-align_absolute-center slds-m-vertical_large">
+                                    <lightning-input label="High risk" variant='brand' value={isHighRisk} type='checkbox'></lightning-input>
+                                </div>
+                            </template>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+                        
+            </template>
+
+            <!--    START Page 2  AML Result  -->
+        
+            <template if:true={page2}>
+                <!-- BUTTONS -->
+                <div slot="footer">
+                    <lightning-button label='List due diligence' onclick={listDueDiligence}></lightning-button>
+                    <lightning-button label='Save AML' disabled={canNotSaveAML} onclick={saveAML} ></lightning-button>
+                </div>
+                <!-- TITLE -->
+                <div slot="title">
+                    <template if:true={dataIsReady} class="slds-align_absolute-center">
+                        <template if:true={isCompany}>
+                            <template if:true={isAccount}>
+                                Results of search on {account.Name}
+                            </template>
+                            <template if:false={isAccount}>
+                                Results of search on {companyData.Company_Name__c}
+                            </template>
+                        </template>
+                        <template if:true={isPerson}>
+                                Results of search on {personData.First_Name__c} {personData.Last_Name__c}
+                        </template>
+                    </template>
+                </div>
+
+                <!-- DATA-->
+                <div  style="height:27rem;">
+                    <lightning-layout horizontal-align="center" >
+                        <lightning-layout-item size="6">
+                            <template if:true={dataIsReady}>
+                                <div class="slds-m-vertical_large">
+                                    <!-- PERSONAL DATA-->
+                                    <template if:true={isPerson}>
+                                        <!-- UK Citizens -->
+                                        <template if:true={isUkCitizen}>
+                                            <table>
+                                                <tr>
+                                                    <td><b>Result</b></td>
+                                                    <td>{amlAttributes.result}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Name and Address match</b></td>
+                                                    <td>{amlAttributes.name_and_address_match}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Identity verified</b></td>
+                                                    <td>{amlAttributes.identity_confirmation_level}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Postal address verified</b></td>
+                                                    <td>{amlAttributes.paf_confirmation}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Deceased Check</b></td>
+                                                    <td>{amlAttributes.deceased_check}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Potential Fraud Alert</b></td>
+                                                    <td>{amlAttributes.potential_fraud_alert}</td>
+                                                </tr>
+                                            </table>
+                                        </template>
+                                        <!-- International citizens-->
+                                        <template if:false={isUkCitizen}>
+                                            <table>
+                                                <tr>
+                                                    <td><b>Document Type</b></td>
+                                                    <td>{amlAttributes.document_type}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Issuing Country</b></td>
+                                                    <td>{amlAttributes.issuing_country}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Status</b></td>
+                                                    <td>{amlAttributes.status}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Status Description</b></td>
+                                                    <td>{amlAttributes.status_description}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Result</b></td>
+                                                    <td>{amlAttributes.result}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Result Reason</b></td>
+                                                    <td>{amlAttributes.result_reasons}</td>
+                                                </tr>
+                                            </table>
+                                        </template>
+                                    </template>
+
+                                    <!-- DUE DILIGENCE-->
+                                    <template if:false={amlDueDiligenceNull}>
+                                        <span class="slds-m-around_small">
+                                            <h1>Due diligence</h1>
+                                        </span>
+
+                                        <table style="width:100%;">
+                                            <tr>
+                                                <td><b>Sanction region</b></td>
+                                                <td>{dueDiligence.sanction_region}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Potential matches found</b></td>
+                                                <td>{dueDiligence.has_due_diligence}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Potential matches still to be reviewed</b></td>
+                                                <td>{dueDiligence.has_outstanding_due_diligence}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Match confirmed</b></td>
+                                                <td>{dueDiligence.has_highrisk_due_diligence}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Sanctions list potential match</b></td>
+                                                <td>{sanctionListPotentialMatch}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Politically Exposed Person</b></td>
+                                                <td>{dueDiligence.politically_exposed_person}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Special Interest Person</b></td>
+                                                <td>{dueDiligence.special_interest_person}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Relative or Close Associate</b></td>
+                                                <td>{dueDiligence.relative_close_associate}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Special Interest Entity</b></td>
+                                                <td>{dueDiligence.special_interest_entity}</td>                            
+                                            </tr>
+                                        </table>
+                                    </template>
+                                </div>
+                            </template>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+        </template>
+
+
+            <!--   START Page 3 List Due diligence-->
+            <template if:true={page3}>
+                <!-- BUTTONS -->
+                <div slot="footer">
+                    <template if:true={isCompany}>
+                        <lightning-button label='View updated DJO' onclick={retrieveDjo} ></lightning-button>
+                    </template>
+                    <template if:true={isPerson}>
+                        <lightning-button label='View updated AML' onclick={retrieveAML} ></lightning-button>
+
+                    </template>
+
+                </div>
+
+                <!-- TITLE -->
+                <div slot="title">
+                    <template if:true = {dueDiligenceCheck}>
+                        <p>Select your clients from the list ({ssid})</p>
+                    </template>
+                    <template if:false = {dueDiligenceCheck}>
+                        <p>No due diligence returned</p>
+                    </template>
+                </div>
+
+                <!-- DATA -->
+                <lightning-layout horizontal-align="center" >
+                    <lightning-layout-item size="11">
+                        <div  style="height:27rem;">
+                            <!--  Company -->
+                            <template if:true = {dueDiligenceCheck}>
+                                <template if:true={isCompany}>
+                                    <table width="100%">
+
+                                        <thead>
+                                            <tr>
+                                                <th ><b>Types</b></th>
+                                                <th ><b>Name</b></th>
+                                                <th ><b>Countries</b></th>
+                                                <th ><b>Is this our client?</b></th>
+                                                <th ><b>SmartSearch</b></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template for:each={dueDiligenceList} for:item=dueDiligence for:index="index">
+                                                <tr key={dueDiligence.ddid}>
+                                                    <td style="width:20%">
+                                                        {dueDiligence.sanction_types}
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        {dueDiligence.name}
+                                                    </td>
+                                                    <td style="width:25%">
+                                                        {dueDiligence.countries}
+                                                    </td>
+                                                    <td style="width:15%">
+                                                        <lightning-combobox name="yourClient" label=" " variant="label-hidden"
+                                                            options={yourClientOptions} value={dueDiligence.your_client} data-index={index} data-ddid={dueDiligence.ddid}
+                                                            onchange={updateClient} >
+                                                        </lightning-combobox>
+                                                    </td>
+                                                    <td style="width:15%">
+                                                        <lightning-button label="View" onclick={displayDDID} data-ddid={dueDiligence.ddid} ></lightning-button>
+                                                    </td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </template>
+                                <!--  Person -->
+                                <template if:true={isPerson}>
+                                    <table>
+                                        <tr>
+                                            <th ><b>Types</b></th>
+                                            <th ><b>Name</b></th>
+                                            <th ><b>D.O.B</b></th>
+                                            <th ><b>Citizenship</b></th>
+                                            <th ><b>Residency</b></th>
+                                            <th ><b>Is this our client?</b></th>
+                                            <th ><b>Smartsearch</b></th>
+                                        </tr>
+                                        <template for:each={dueDiligenceList} for:item=dueDiligence for:index="index">
+                                            <tr key={dueDiligence.ddid}>
+                                                <td style="width:15%">
+                                                    {dueDiligence.sanction_types}
+                                                </td>
+                                                <td style="width:20%">
+                                                    {dueDiligence.name}
+                                                </td>
+                                                <td style="width:15%">
+                                                    <template for:each={dueDiligence.date_of_births} for:item="dob" for:index="indexDOB">
+                                                        {dob.full}
+                                                    </template>
+                                                </td>
+                                                <td style="width:20%">
+                                                    {dueDiligence.citizenship}
+                                                </td>
+                                                <td style="width:20%">
+                                                    {dueDiligence.residency}
+                                                </td>
+                                                <td style="width:15%">
+                                                    <lightning-combobox name="yourClient" label=" " variant="label-hidden"
+                                                        options={yourClientOptions} value={dueDiligence.your_client} data-index={index} data-ddid={dueDiligence.ddid}
+                                                        onchange={updateClient} >
+                                                    </lightning-combobox>
+                                                </td>
+                                                <td style="width:15%">
+                                                    <lightning-button label="View" onclick={displayDDID} data-ddid={dueDiligence.ddid} ></lightning-button>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </table>
+                                </template>
+                            </template>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>    
+        </lightning-card>
+    </template>
+</template>

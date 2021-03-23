@@ -1,0 +1,19 @@
+{
+    "errors": [
+        {
+            "status": "401",
+            "title": "Unauthorized",
+            "detail": "Credentials could not be validated.",
+            "meta": {
+                "documentation": "https://sandbox-api.smartsearchsecure.com/#operation/AuthToken"
+            }
+        }
+    ],
+    "meta": {
+        "reference": "ca8a7924-f5d8-4acd-843b-d708f5dd38df",
+        "timestamp": "2021-01-06T14:52:31+00:00",
+        "duration": 0.168,
+        "version": "2.2.1",
+        "notices": []
+    }
+}

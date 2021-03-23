@@ -1,0 +1,7 @@
+.datatable-content {
+    max-height: 410px;
+    overflow-y: auto;
+}
+.cd-row {
+    line-height: 2rem;
+}

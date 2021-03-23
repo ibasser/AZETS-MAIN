@@ -1,0 +1,16 @@
+{
+    "data": {
+        "attributes": {
+            "token_type": "Bearer",
+            "expires_in": 86400,
+            "access_token": "thisIsAValidToken"
+        }
+    },
+    "meta": {
+        "reference": "c49be47b-8b5d-423f-a02d-e76bd2727e50",
+        "timestamp": "2021-01-05T15:40:55+00:00",
+        "duration": 0.257,
+        "version": "2.2.1",
+        "notices": []
+    }
+}

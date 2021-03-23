@@ -1,0 +1,206 @@
+<!--
+  @description       :
+  @author            : Bluewave | Tomasz Piechota
+  @group             :
+  @last modified on  : 02-03-2021
+  @last modified by  : Bluewave | Tomasz Piechota
+  Modifications Log
+  Ver   Date         Author                       Modification
+  1.0   11-03-2020   Bluewave | Tomasz Piechota   Initial Version
+-->
+<template>
+    <header class="slds-modal__header">
+        <h2 id="update-company-data-modal-heading" class="slds-modal__title slds-hyphenate">Update Company Data</h2>
+    </header>
+
+    <!-- START - ERROR MESSAGE SECTION -->
+    <!-- <template if:true={hasErrorCountry}>
+        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+            <span class="slds-assistive-text">Error</span>
+            <h2><strong>Trading Country</strong> field on the Account is missng.&nbsp;
+                <lightning-button label="Update Account" variant="base" onclick={handleAccountUpdate}></lightning-button>
+            </h2>
+        </div>
+    </template>
+    <template if:true={hasErrorPostcode}>
+        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning" role="alert">
+            <span class="slds-assistive-text">Warning</span>
+            <h2><strong>Trading Zip/Postal Code</strong> field on the Account is missng.&nbsp;
+                <lightning-button label="Update Account" variant="base" onclick={handleAccountUpdate}></lightning-button>
+            </h2>
+        </div>
+    </template>
+    <template if:true={hasErrorAccountName}>
+        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning" role="alert">
+            <span class="slds-assistive-text">Warning</span>
+            <h2>Related Acount does not have value specified in the <strong>Name</strong> field.</h2>
+        </div>
+    </template> -->
+    <!-- END - ERROR MESSAGE SECTION -->
+
+    <div class="slds-modal__content slds-is-relative" id="update-company-data-modal-content-id">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+        <!--START - MAIN MENU -->
+        <template if:true={showCompanyDetails}>
+            <div class="slds-p-around_medium">
+                <code><pre>{creditsafeCompanyDetails}</pre></code>
+            </div>
+            <footer class="slds-modal__footer">
+                <lightning-button variant="brand" label="Back" title="Back" onclick={handleCloseCompanyDetails}></lightning-button>
+            </footer>
+        </template>
+        <template if:false={showCompanyDetails}>
+            <template if:true={showCompanySearchParamForm}>
+                <div class="slds-form">
+                    <div class="slds-p-around_medium">
+                        <template if:false={countryOptionsLoaded}>
+                            <div class="slds-text-align_center">
+                                <h2>There was a problem retrieving the Country list. Please refresh the page and try again. If the problem persists please contact your System Administration.</h2>
+                            </div>
+                        </template>
+                        <template if:true={countryOptionsLoaded}>
+                            <fieldset class="slds-form-element slds-form-element_stacked">
+                                <lightning-combobox required value={creditsafeCompanySearchCountry} name="country" label="Country" placeholder="Select Country" options={countryOptions} onchange={handleChange} class="azets-countries"></lightning-combobox>
+                                <lightning-input value={creditsafeCompanySearchName} type="text" name="name" label="Company Name" onchange={handleChange} disabled={disabledCompanyPoscodeField}></lightning-input>
+                                <!-- <lightning-input value={creditsafeCompanySearchCountry} type="text" name="country" label="Country" required onchange={handleChange}></lightning-input> -->
+                                <lightning-input value={creditsafeCompanySearchPostalCode} type="text" name="postcode" label="Postal Code" onchange={handleChange} disabled={disabledCompanyPoscodeField}></lightning-input>
+                                <lightning-input value={creditsafeCompanyRegistrationNumber} type="text" name="regno" label="Registration Number" onchange={handleChange} disabled={regNoDisabled}></lightning-input>
+                                <div class="slds-scrollable" style="height: 2rem;"></div>
+                            </fieldset>
+                        </template>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button variant="neutral" label="Cancel" title="Cancel" onclick={handleHideCompanySearchParamForm} class="slds-m-right_small"></lightning-button>
+                        <lightning-button variant="brand" label="Search" onclick={handleNewCompanySearch} disabled={disableNewCompanySearch}></lightning-button>
+                    </footer>
+                </div>
+            </template>
+            <!-- COMPANY UPDATE WITH REASON -->
+            <template if:true={showCompanyUpdateWithReasonForm}>
+                <div class="slds-form">
+                    <div class="slds-p-around_medium">
+                        <template if:false={reasonOptionsLoaded}>
+                            <div class="slds-text-align_center">
+                                <h2>There was a problem retrieving the Credit Report Reasons list. Please refresh the page and try again. If the problem persists please contact your System Administration.</h2>
+                            </div>
+                        </template>
+                        <template if:true={reasonOptionsLoaded}>
+                            <fieldset class="slds-form-element slds-form-element_stacked">
+                                <lightning-combobox required value={creditsafeCreditReportReasonValue} name="reason" label="Reason" placeholder="Select Reason" options={reasonOptions} onchange={handleChange} class="azets-reasons"></lightning-combobox>
+                                <div class="slds-scrollable" style="height: 8rem;"></div>
+                            </fieldset>
+                        </template>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button variant="neutral" label="Cancel" title="Cancel" onclick={handleHideCompanyUpdateWithReasonForm} class="slds-m-right_small"></lightning-button>
+                        <lightning-button variant="brand" label="Update" onclick={handleUpdateCompanyDataWithReason} disabled={disableUpdateCompanyDataReasons}></lightning-button>
+                    </footer>
+                </div>
+            </template>
+            <!-- COMPANY SEARCH PARAMS FORM -->
+            <template if:false={showCompanySearchParamForm}>
+                <template if:false={showCompanyUpdateWithReasonForm}>
+                    <template if:false={showSearchResults}>
+                        <template if:true={wiredAccount.data}>
+                            <template if:true={accountNotLinked}>
+                                <lightning-layout vertical-align="center">
+                                    <lightning-layout-item padding="around-small">
+                                        <p>Account not yet linked.</p>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </template>
+                            <template if:false={accountNotLinked}>
+                                <lightning-layout vertical-align="center">
+                                    <lightning-layout-item padding="around-small">
+                                        <p>Account linked. Connect Id: {connectId}</p>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </template>
+                            <lightning-layout vertical-align="center">
+                                <lightning-layout-item padding="around-small">
+                                    <lightning-button-group>
+                                        <!-- <lightning-button label="New Company Search" onclick={handleNewCompanySearch} disabled={disableNewCompanySearch} value={currentPage}></lightning-button> -->
+                                        <lightning-button label="New Company Search" onclick={handleShowCompanySearchParamForm}></lightning-button>
+                                        <lightning-button label="Update Company Data" onclick={handleUpdateCompanyData} disabled={accountNotLinked} if:false={isGermanConnectId}></lightning-button>
+                                        <lightning-button label="Update Company Data (DE)" onclick={handleShowCompanyUpdateWithReasonForm} disabled={accountNotLinked} if:true={isGermanConnectId}></lightning-button>
+                                        <lightning-button label="Initiate Conflict Check" onclick={handleInitiateConflictCheck} disabled={noCompanyData}></lightning-button>
+                                    </lightning-button-group>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </template>
+                    </template>
+                    <!--END - MAIN MENU -->
+
+                    <!--START - COMPANY SEARCH RESULT TABLE -->
+                    <template if:true={showSearchResults}>
+                        <div class="slds-p-around_medium">
+                            <p>Total:&nbsp;{totalResults}&nbsp;Results</p>
+                        </div>
+                        <div class="datatable-content">
+                            <lightning-datatable
+                                key-field="id"
+                                data={companySearchData}
+                                columns={columns}
+                                onrowaction={handleRowAction}
+                                hide-checkbox-column
+                                class="creditsafe-company-search slds-m-top_small">
+                            </lightning-datatable>
+                        </div>
+                        <template if:true={showLoadMoreResults}>
+                            <lightning-layout horizontal-align="center">
+                                <lightning-layout-item padding="around-small">
+                                    <lightning-button variant="brand"
+                                        label={loadMoreResultsButtonLabel}
+                                        title={loadMoreResultsButtonLabel}
+                                        icon-name="utility:download"
+                                        class="slds-m-left_x-small"
+                                        onclick={handleGetMoreRecords}
+                                        value={currentPage}>
+                                    </lightning-button>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </template>
+                    </template>
+                    <!--END - COMPANY SEARCH RESULT TABLE -->
+                    <lightning-layout>
+                        <lightning-layout-item>
+                            <!-- CREDIT REPORT RESULTS -->
+                            <template if:true={companyDataRetrieved}>
+                                <div class="slds-p-around_medium">
+                                    <p class="slds-m-top_medium slds-m-bottom_medium slds-text-heading_small">
+                                        Company Credit Report results.
+                                    </p>
+                                    <template for:each={companyDataRecords} for:item="cc">
+                                        <p key={cc.key} class={cc.messageClass} >
+                                            {cc.message}&nbsp;
+                                            <lightning-icon icon-name={cc.iconName} alternative-text="Error!" variant={cc.variant}
+                                        title={cc.message} size="xx-small"></lightning-icon>
+                                        </p>
+                                    </template>
+                                </div>
+                            </template>
+                        </lightning-layout-item>
+                        <lightning-layout-item>
+                            <!-- CONFLICT CHECK RESULTS -->
+                            <c-conflict-check record-id={recordId} manual-retrieve={manualConflictCheck} show-conflict-check={showConflictCheckResults}></c-conflict-check>
+                        </lightning-layout-item>
+                    </lightning-layout>
+
+                </template>
+            </template>
+        </template>
+    </div>
+    <template if:false={showCompanyDetails}>
+        <template if:false={showCompanySearchParamForm}>
+            <template if:false={showCompanyUpdateWithReasonForm}>
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="neutral" label="New Search" title="New Search" onclick={handleShowCompanySearchParamForm} class="slds-m-right_small" if:true={showSearchResults}></lightning-button>
+                    <lightning-button variant="brand" label="Cancel" title="Cancel" onclick={handleCancel} if:false={companyDataRetrieved}></lightning-button>
+                    <lightning-button variant="brand" label="Complete" title="Complete" onclick={handleCancel} if:true={companyDataRetrieved}></lightning-button>
+                </footer>
+            </template>
+        </template>
+    </template>
+</template>

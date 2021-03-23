@@ -1,0 +1,682 @@
+{
+    "correlationId": "TESTTEST-TEST-TEST-TEST-TESTTESTTEST",
+    "companyId": "GB-0-XXXXXXXX",
+    "dateOfOrder": "2020-12-04T15:33:25.646Z",
+    "language": "en",
+    "userId": "111111111",
+    "orderId": "111111111",
+    "chargeReference": "chargeReference TEST",
+    "test":"test",
+    "failedSections" : [
+        "Nothing to do",
+        "Nothing to do"
+    ],
+    "messages": [
+        {
+            "code": "XXX",
+            "test":"test",
+            "text": "TEST MESSAge"
+        },
+        {
+            "code": "XXX",
+            "text": "TEST MESSAge"
+        }
+    ],
+    "report": {
+        "test":"test",
+        "companyId": "GB-0-11111111",
+        "language": "EN",
+        "companySummary": {
+            "test":"test",
+            "businessName": "TEST M LIMITED",
+            "country": "GB",
+            "companyNumber": "UKXXXXXXXX",
+            "companyRegistrationNumber": "11111111",
+            "latestTurnoverFigure": {
+                "test":"test",
+                "currency": "GBP",
+                "value": 500
+            },
+            "latestShareholdersEquityFigure": {
+                "currency": "GBP",
+                "value": 500
+            },
+            "mainActivity": {
+                "code": "49410",
+                "description": "Freight transport by road",
+                "classification": "SIC07",
+                "test":"test",
+                "industrySector": "test test test"
+            },
+            "companyStatus": {
+                "test":"test",
+                "status": "Active",
+                "providerStatus": "Active",
+                "description": "Active - Newly Incorporated"
+            },
+            "creditRating": {
+                "test":"test",
+                "commonValue": "C",
+                "commonDescription": "Moderate Risk",
+                "creditLimit": {
+                    "currency": "GBP",
+                    "value": "500"
+                },
+                "providerValue": {
+                    "maxValue": "100",
+                    "minValue": "1",
+                    "value": "42"
+                },
+                "providerDescription": "Moderate Risk",
+                "assessment": "test assessment"
+            }
+        },
+        "groupStructure": {
+            "test":"test",
+            "ultimateParent": {
+                "test":"test",
+                "country": "GB",
+                "id": "GB-0-adasdasdd",
+                "safeNumber": "UK00065815",
+                "name": "TEST TEST ultimateParent",
+                "type": "NotSet",
+                "status": "Pending",
+                "registrationNumber": "00000000",
+                "idType": "RegistrationNumber",
+                "officeType": "test",
+                "vatNumber": "UK00065815",
+                "vatNumber": "Person",
+                "legalForm": "test",
+                "address": {
+                    "type": "TEST",
+                    "simpleValue": "TEST",
+                    "street": "TEST",
+                    "city": "TEST",
+                    "postalCode": "TEST"
+                }
+            },
+            "immediateParent": {
+                "country": "GB",
+                "id": "GB-0-adasdasdd",
+                "safeNumber": "UK00065815",
+                "name": "TEST TEST immediateParent",
+                "type": "NotSet",
+                "status": "Pending",
+                "registrationNumber": "00000000"
+            },
+            "subsidiaryCompanies": [
+                {
+                    "country": "GB",
+                    "id": "GB-0-adasdasdd",
+                    "safeNumber": "UK00065815",
+                    "name": "TEST TEST LIMITED",
+                    "type": "NotSet",
+                    "status": "Pending",
+                    "registrationNumber": "00000000"
+                },
+                {
+                    "country": "GB",
+                    "id": "GB-0-00715672",
+                    "safeNumber": "UK00390876",
+                    "name": "TEST LIMITED",
+                    "type": "NotSet",
+                    "status": "NonActive",
+                    "registrationNumber": "00000000"
+                }
+            ],
+            "affiliatedCompanies": [
+                {
+                    "country": "GB",
+                    "id": "GB-0-00299400",
+                    "safeNumber": "UK00065815",
+                    "name": "TEST TEST LIMITED",
+                    "type": "NotSet",
+                    "status": "Pending",
+                    "registrationNumber": "00000000"
+                },
+                {
+                    "country": "GB",
+                    "id": "GB-0-xxxxxxxx",
+                    "safeNumber": "UK111231333",
+                    "name": "TEST LIMITED",
+                    "type": "NotSet",
+                    "status": "NonActive",
+                    "registrationNumber": "00000000"
+                }
+            ]
+        },
+        "companyIdentification": {
+            "test":"test",
+            "basicInformation": {
+                "test":"test",
+                "businessName": "TEST M LIMITED",
+                "registeredCompanyName": "TEST M LIMITED",
+                "companyRegistrationNumber": "0000000",
+                "vatRegistrationNumber": "0000000",
+                "country": "GB",
+                "companyRegistrationDate": "2019-12-03T00:00:00Z",
+                "ownershipType": "Absolute",
+                "legalForm": {
+                    "test":"test",
+                    "commonCode": "XXXX",
+                    "providerCode": "XXXX",
+                    "dateChanged": "2019-12-03T00:00:00Z",
+                    "description": "Private limited with Share Capital",
+                    "legalForm": {
+                        "commonCode": "XXXX",
+                        "providerCode": "XXXX",
+                        "dateChanged": "2019-12-03T00:00:00Z",
+                        "description": "Private limited with Share Capital"
+                    }
+                },
+                "companyStatus": {
+                    "status": "Active",
+                    "providerStatus": "Active",
+                    "description": "Active - Newly Incorporated"
+                },
+                "principalActivity": {
+                    "classification": "default",
+                    "test":"test"
+                },
+                "contactAddress": {
+                    "type": "Registered Address",
+                    "simpleValue": "TEST TEST TEST",
+                    "street": "TEST",
+                    "houseNumber": "89",
+                    "city": "TEST",
+                    "postalCode": "TEST",
+                    "province": "TEST",
+                    "telephone": "0000 000 0000",
+                    "directMarketingOptOut": false,
+                    "directMarketingOptIn": true,
+                    "country": "United Kingdom"
+                }
+            },
+            "activityClassifications": [
+                {
+                    "classification": "SIC03",
+                    "test":"test",
+                    "activities": [
+                        {
+                            "test":"test",
+                            "code": "6024",
+                            "description": "Freight transport by road",
+                            "industrySector":"test"
+                        }
+                    ]
+                },
+                {
+                    "classification": "SIC07",
+                    "activities": [
+                        {
+                            "code": "49410",
+                            "description": "Freight transport by road"
+                        }
+                    ]
+                }
+            ],
+            "previousNames": [
+                {
+                    "test":"test",
+                    "dateChanged": "2019-12-03T00:00:00Z",
+                    "name": "test"
+                }
+            ],
+            "previousLegalForms": [
+                {
+                    "commonCode": "XXXX",
+                    "providerCode": "XXXX",
+                    "dateChanged": "2019-12-03T00:00:00Z",
+                    "description": "Private limited with Share Capital",
+                    "legalForm": {
+                        "commonCode": "XXXX",
+                        "providerCode": "XXXX",
+                        "dateChanged": "2019-12-03T00:00:00Z",
+                        "description": "Private limited with Share Capital"
+                    }
+                }
+            ]
+        },
+        "creditScore": {
+            "test":"test",
+            "currentContractLimit": {
+                "currency": "GBP",
+                "value": 500
+            },
+            "currentCreditRating": {
+                "commonValue": "C",
+                "commonDescription": "Moderate Risk",
+                "creditLimit": {
+                    "test":"test",
+                    "currency": "GBP",
+                    "value": "500"
+                },
+                "currentContractLimit": {
+                    "currency": "GBP",
+                    "value": 500
+                },
+                "providerValue": {
+                    "test":"test",
+                    "maxValue": "100",
+                    "minValue": "1",
+                    "value": "42"
+                },
+                "providerDescription": "Moderate Risk",
+                "pod": 1.2456
+            },
+            "previousCreditRating": {
+                "commonValue": "C",
+                "commonDescription": "Moderate Risk",
+                "creditLimit": {
+                    "currency": "GBP",
+                    "value": "500"
+                },
+                "providerValue": {
+                    "maxValue": "100",
+                    "minValue": "1",
+                    "value": "47"
+                },
+                "providerDescription": "Moderate Risk"
+            },
+            "latestRatingChangeDate": "2019-12-06T05:00:00Z",
+            "currentContractLimit": {
+                "currency": "GBP",
+                "value": 500
+            }
+        },
+        "contactInformation": {
+            "test":"test",
+            "websites": [
+                "www.test.example.com"
+            ],
+            "mainAddress": {
+                "test":"test",
+                "type": "Registered Address",
+                "simpleValue": "TEST TEST TEST",
+                "street": "TEST",
+                "houseNumber": "89",
+                "city": "TEST",
+                "postalCode": "TEST",
+                "province": "TEST"
+            },
+            "otherAddresses": [
+                {
+                    "test":"test",
+                    "type": "Main Trading Address",
+                    "simpleValue": "TEST TEST TEST",
+                    "street": "TEST",
+                    "houseNumber": "89",
+                    "city": "TEST",
+                    "postalCode": "TEST",
+                    "province": "TEST"
+                },
+                {
+                    "type": "Trading Address",
+                    "simpleValue": "TEST TEST TEST",
+                    "street": "TEST",
+                    "houseNumber": "89",
+                    "city": "TEST",
+                    "postalCode": "TEST",
+                    "province": "TEST"
+                }
+            ],
+            "previousAddresses": [
+                {
+                    "test":"test",
+                    "type": "Main Trading Address",
+                    "simpleValue": "TEST TEST TEST",
+                    "street": "TEST",
+                    "houseNumber": "89",
+                    "city": "TEST",
+                    "postalCode": "TEST",
+                    "province": "TEST"
+                },
+                {
+                    "type": "Trading Address",
+                    "simpleValue": "TEST TEST TEST",
+                    "street": "TEST",
+                    "houseNumber": "89",
+                    "city": "TEST",
+                    "postalCode": "TEST",
+                    "province": "TEST"
+                }
+            ],
+            "emailAddresses": [
+                "test@example.com"
+            ]
+        },
+        "shareCapitalStructure": {
+            "test":"test",
+            "shareCapitalCurrency": "GBP",
+            "nominalShareCapital": {
+                "currency": "GBP",
+                "value": 1.0
+            },
+            "issuedShareCapital": {
+                "currency": "GBP",
+                "value": 1.0
+            },
+            "numberOfSharesIssued": 1,
+            "shareHolders": [
+                {
+                    "test":"test",
+                    "id": "xxxxxxxxx",
+                    "idType": "Person",
+                    "title": "test",
+                    "firstNames": "test",
+                    "firstName": "test",
+                    "middleName": "test",
+                    "surname": "test",
+                    "startDate": "1981-03-01T00:00:00Z",
+                    "endDate": "1981-03-01T00:00:00Z",
+                    "hasNegativeInfo": false,
+                    "name": "TEST TEST TEST",
+                    "shareholderType": "Person",
+                    "shareType": "ORDINARY",
+                    "currency": "GBP",
+                    "totalValueOfSharesOwned": 1.0,
+                    "totalNumberOfSharesOwned": 1,
+                    "percentSharesHeld": 100.0,
+                    "shareClasses": [
+                        {
+                            "shareType": "ORDINARY",
+                            "currency": "GBP",
+                            "valuePerShare": 1.0,
+                            "numberOfSharesOwned": 1,
+                            "valueOfSharesOwned": 1.0,
+                            "additionalData": {
+                                "percentSharesHeld": 100.0
+                            }
+                        }
+                    ],
+                    "address": {
+                        "test":"test",
+                        "type": "Registered Address",
+                        "simpleValue": "TEST TEST TEST",
+                        "street": "TEST",
+                        "houseNumber": "89",
+                        "city": "TEST",
+                        "postalCode": "TEST",
+                        "province": "TEST"
+                    }
+                },
+                {
+                    "name": "TEST TEST TEST",
+                    "shareholderType": "Company",
+                    "shareType": "ORDINARY",
+                    "currency": "GBP",
+                    "totalValueOfSharesOwned": 1.0,
+                    "totalNumberOfSharesOwned": 1,
+                    "percentSharesHeld": 100.0,
+                    "shareClasses": [
+                        {
+                            "shareType": "ORDINARY",
+                            "currency": "GBP",
+                            "valuePerShare": 1.0,
+                            "numberOfSharesOwned": 1,
+                            "valueOfSharesOwned": 1.0,
+                            "additionalData": {
+                                "percentSharesHeld": 100.0
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "directors": {
+            "test":"test",
+            "currentDirectors": [
+                {
+                    "test":"test",
+                    "id": "GB-XXXXXXXXX",
+                    "idType": "PersonNumber",
+                    "name": "Mr TEST TEST TEST",
+                    "title": "Mr",
+                    "firstName": "TEST",
+                    "firstNames": "TEST",
+                    "birthName": "TEST",
+                    "middleName": "TEST",
+                    "placeOfBirth": "TEST",
+                    "countryOfResidence": "TEST",
+                    "country": "TEST",
+                    "surname": "TEST",
+                    "address": {
+                        "test":"test",
+                        "type": "TEST",
+                        "simpleValue": "TEST",
+                        "street": "TEST",
+                        "city": "TEST",
+                        "postalCode": "TEST"
+                    },
+                    "gender": "Male",
+                    "dateOfBirth": "1981-03-01T00:00:00Z",
+                    "nationality": "Romanian",
+                    "directorType": "Person",
+                    "positions": [
+                        {
+                            "dateAppointed": "2019-12-03T00:00:00Z",
+                            "positionName": "Director"
+                        }
+                    ],
+                    "additionalData": {
+                        "presentAppointments": 1,
+                        "disqualified": false,
+                        "disqualifiedException": false,
+                        "occupation": "TEST DRIVER"
+                    },
+                    "hasNegativeInfo": false,
+                    "signingAuthority": false,
+                    "resignationDate": "2019-12-03T00:00:00Z",
+                    "registrationNumber": "11111111"
+                }
+            ],
+            "previousDirectors": [
+                {
+                    "test":"test",
+                    "id": "GB-XXXXXXXXX",
+                    "idType": "PersonNumber",
+                    "name": "Mr TEST TEST TEST",
+                    "title": "Mr",
+                    "firstName": "TEST",
+                    "middleName": "TEST",
+                    "surname": "TEST",
+                    "address": {
+                        "test":"test",
+                        "type": "TEST",
+                        "simpleValue": "TEST",
+                        "street": "TEST",
+                        "city": "TEST",
+                        "postalCode": "TEST"
+                    },
+                    "gender": "Male",
+                    "dateOfBirth": "1981-03-01T00:00:00Z",
+                    "nationality": "Romanian",
+                    "directorType": "Person",
+                    "positions": [
+                        {
+                            "dateAppointed": "2019-12-03T00:00:00Z",
+                            "positionName": "Director"
+                        }
+                    ],
+                    "additionalData": {
+                        "presentAppointments": 1,
+                        "disqualified": false,
+                        "disqualifiedException": false,
+                        "occupation": "TEST DRIVER"
+                    }
+                }
+            ]
+        },
+        "paymentData": {
+            "paymentTrend": "TrendNotAvailable",
+            "industryDBT": 14
+        },
+        "negativeInformation": {
+            "ccjSummary": {
+                "exactRegistered": 0,
+                "possibleRegistered": 0,
+                "numberOfExact": 0,
+                "numberOfPossible": 0,
+                "numberOfSatisfied": 0,
+                "numberOfWrits": 0,
+                "currency": "GBP"
+            }
+        },
+        "additionalInformation": {
+            "test":"test",
+            "miscellaneous": {
+                "oddsOfFailure": "78:1"
+            },
+            "companyHistory": [
+                {
+                    "date": "2019-12-05T22:56:42Z",
+                    "description": "New Incorporation Document"
+                },
+                {
+                    "date": "2019-12-05T00:00:00Z",
+                    "description": "New Board Member Mr TEST appointed"
+                }
+            ],
+            "mortgageSummary": {
+                "outstanding": 0,
+                "satisfied": 0
+            },
+            "commentaries": [
+                {
+                    "commentaryText": "This company has been treated as a New company in terms of the score/limit that has been generated",
+                    "positiveNegative": "Neutral",
+                    "positiveOrNegative": "Neutral"
+                },
+                {
+                    "commentaryText": "There has been no director resignations within the last 6 months.",
+                    "positiveNegative": "Positive",
+                    "positiveOrNegative": "Positive"
+                },
+                {
+                    "commentaryText": "This company trades in an industry that has seen a high level of corporate failures.",
+                    "positiveNegative": "Negative",
+                    "positiveOrNegative": "Negative"
+                },
+                {
+                    "commentaryText": "The overall size of the board for this company is considered to be low.",
+                    "positiveNegative": "Negative",
+                    "positiveOrNegative": "Negative"
+                }
+            ],
+            "personsWithSignificantControl": {
+                "test":"test",
+                "activePSC": [
+                    {
+                        "test":"test",
+                        "title": "Mr",
+                        "name": "Mr TEST TEST",
+                        "personType": "Person",
+                        "address": {
+                            "test":"test",
+                            "simpleValue": "TEST",
+                            "street": "TEST",
+                            "houseNumber": "TEST",
+                            "city": "TEST",
+                            "postalCode": "TEST"
+                        },
+                        "country": "England",
+                        "dateOfBirth": "1981-03-01T00:00:00Z",
+                        "kind": "individual-person-with-significant-control",
+                        "countryOfResidence": "United Kingdom",
+                        "countryOfRegistration": "United Kingdom",
+                        "placeRegistered": "United Kingdom",
+                        "registrationNumber": "11111111",
+                        "nationality": "Romanian",
+                        "governingLaw": "United Kingdom",
+                        "legalForm": "United Kingdom",
+                        "natureOfControl": "ownership-of-shares-75-to-100-percent,voting-rights-75-to-100-percent,right-to-appoint-and-remove-directors",
+                        "notifiedOn": "2019-12-03T00:00:00Z",
+                        "insertDate": "2020-12-03T20:56:51Z"
+                    },
+                    {
+                        "title": "Mr",
+                        "name": "Company TEST TEST",
+                        "personType": "Company",
+                        "address": {
+                            "test":"test",
+                            "simpleValue": "TEST",
+                            "street": "TEST",
+                            "houseNumber": "TEST",
+                            "city": "TEST",
+                            "postalCode": "TEST"
+                        },
+                        "country": "England",
+                        "dateOfBirth": "1981-03-01T00:00:00Z",
+                        "kind": "individual-person-with-significant-control",
+                        "countryOfResidence": "United Kingdom",
+                        "nationality": "Romanian",
+                        "natureOfControl": "ownership-of-shares-75-to-100-percent,voting-rights-75-to-100-percent,right-to-appoint-and-remove-directors",
+                        "notifiedOn": "2019-12-03T00:00:00Z",
+                        "insertDate": "2020-12-03T20:56:51Z"
+                    }
+                ]
+            },
+            "ratingHistory": [
+                {
+                    "date": "2019-12-06T05:00:00Z",
+                    "companyValue": 42,
+                    "ratingDescription": "Moderate Risk"
+                },
+                {
+                    "date": "2019-12-05T02:00:45Z",
+                    "companyValue": 47,
+                    "ratingDescription": "Moderate Risk"
+                }
+            ],
+            "creditLimitHistory": [
+                {
+                    "date": "2019-12-06T05:00:00Z",
+                    "companyValue": {
+                        "currency": "GBP",
+                        "value": 500.0
+                    }
+                },
+                {
+                    "date": "2019-12-05T02:00:45Z",
+                    "companyValue": {
+                        "currency": "GBP",
+                        "value": 500.0
+                    }
+                }
+            ],
+            "landRegistry": {
+                "registeredLandAndProperty": 3
+            },
+            "enquiriesTrend": {
+                "latestEnquiryDate": "2020-11-20T08:06:26Z",
+                "month1": 0,
+                "month2": 7,
+                "month3": 14,
+                "month4": 4,
+                "month5": 6,
+                "month6": 3,
+                "month7": 5,
+                "month8": 5,
+                "month9": 4,
+                "month10": 2,
+                "month11": 2,
+                "month12": 9,
+                "months1to3": 21,
+                "months4to6": 13,
+                "months7to9": 14,
+                "months10to12": 13,
+                "monthlyAverage": 5.0
+            },
+            "scoreTiers": [
+                {
+                    "activityCode": "49410",
+                    "numberOfActivityCode": 65521,
+                    "ranking": {
+                        "code": 3,
+                        "description": "middle to lower 25%"
+                    }
+                }
+            ]
+        }
+    }
+}

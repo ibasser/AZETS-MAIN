@@ -1,0 +1,51 @@
+.template-error {
+    background-color: white;
+    border: 1px solid rgb(194, 57, 52);
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    color: rgb(194, 57, 52);
+}
+
+.ra-badge_sub-area {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    padding: 0.15rem 0.3rem 0.1rem;
+    font-size: 0.55rem;
+    border-radius: 0;
+}
+
+.debug-badge {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.55rem;
+    border-radius: 0;
+}
+
+.ra-question_wrapper {
+    position: relative;
+}
+
+.slds-form-element__legend.detail-question_label {
+    font-weight: normal;
+}
+
+.ra-badge_wrapper {
+    border-bottom: 2px solid #ecebea;
+}
+
+.debug-info {
+    border: 2px solid rgb(194, 57, 52);
+}
+
+.debug-info .slds-badge {
+    padding: .1rem .3rem .1rem;
+    border-width: 3px;
+}
+
+.debug-info .debug-badge,
+.debug-info .debug-content {
+    display: table-cell;
+    vertical-align: middle;
+}

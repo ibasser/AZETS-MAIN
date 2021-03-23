@@ -1,0 +1,187 @@
+<aura:component controller="createPaymentSchedule_Controller"
+				implements="force:lightningQuickAction,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId">
+	
+	<!-- 0. Includes & Dependencies -->
+    
+    <!-- 1. Attributes -->
+
+    <aura:attribute name="recordId" type="String" default="" />
+    <aura:attribute name="amount" type="Decimal" default="" />
+    <aura:attribute name="month" type="Integer" default="" />
+    <aura:attribute name="frequency" type="String" default="" />
+    <aura:attribute name="probability" type="String" default="" />
+    <aura:attribute name="noOfPayments" type="Integer" default="" />
+    <aura:attribute name="monthOptions" type="List" default="[
+    {'label': 'January', 'value': '1'},
+    {'label': 'February', 'value': '2'},
+    {'label': 'March', 'value': '3'},
+    {'label': 'April', 'value': '4'},
+    {'label': 'May', 'value': '5'},
+    {'label': 'June', 'value': '6'},
+    {'label': 'July', 'value': '7'},
+    {'label': 'August', 'value': '8'},
+    {'label': 'September', 'value': '9'},
+    {'label': 'October', 'value': '10'},
+    {'label': 'November', 'value': '11'},
+    {'label': 'December', 'value': '12'}
+    ]"/>
+    <aura:attribute name="frequencyOptions" type="List" default="[
+    {'label': 'Monthly', 'value': 'Monthly'},
+    {'label': 'Quarterly', 'value': 'Quarterly'}
+    ]"/>
+    <aura:attribute name="probabilityOptions" type="List" default="[
+    {'label': '5', 'value': '5'},
+    {'label': '25', 'value': '25'},
+    {'label': '50', 'value': '50'},
+    {'label': '75', 'value': '75'},
+    {'label': '100', 'value': '100'}
+    ]"/>
+    <aura:attribute name="showError" type="Boolean" default="false" />
+    <aura:attribute name="showSuccess" type="Boolean" default="false" />
+    <aura:attribute name="errorMessage" type="String" default="" />
+
+    <!-- 2. Handlers -->
+    <aura:handler name="init" 
+                  value="{!this}" 
+                  action="{!c.doInit}"
+                  description="Handle the 'initialise' event."
+                  />     
+    
+    <!-- 3. Events -->
+    
+    <!-- 4. Methods -->
+    
+    <!-- 5. Data Service Components -->  
+    
+    <!-- 6. Layout -->
+
+
+	<aura:html tag="style">
+
+	    .modal-footer {
+	    display: none;
+	    }
+	</aura:html>
+
+
+
+
+		    <div class="slds-grid slds-wrap slds-grid--pull-padded">
+		        
+		        
+		        <div class="slds-p-horizontal--small slds-size--1-of-1">
+		            
+		            
+		            <article class="slds-card" style="background-color:white">
+		                <form class="slds-form">
+
+		                	<aura:if isTrue="{! !v.showSuccess }">
+
+		               			<div class="slds-form-element__control">
+					            	<lightning:combobox name="month" 
+					            						label="Start Month" 
+					            						value="{!v.month}" 
+					            						placeholder="Select Start Month" 
+					            						options="{! v.monthOptions }"
+					            						required="true"/>
+
+					            </div>
+
+					            <div class="slds-form-element__control slds-p-top--small">
+					                <lightning:combobox name="Probability" 
+					            						label="Probability %" 
+					            						value="{!v.probability}" 
+					            						placeholder="Select Probability %" 
+					            						options="{! v.probabilityOptions }"
+					            						required="true"/>
+					            </div>
+
+					            <div class="slds-form-element__control slds-p-top--small">
+					                <lightning:combobox name="Payment Frequency" 
+					            						label="Frequency" 
+					            						value="{!v.frequency}" 
+					            						placeholder="Select Frequency" 
+					            						options="{! v.frequencyOptions }"
+					            						required="true"/>
+					            </div>
+
+					            <div class="slds-form-element__control slds-p-top--small" style="font-size: .75rem;">
+					                <ui:inputCurrency 	label="Payment Amount"
+					                              		labelClass=""
+					                              		class="slds-form-element__control slds-input"
+					                              		value="{!v.amount}"
+					                              		required="true"
+					                              		/>
+					            </div>
+					            
+					            <div class="slds-form-element__control slds-p-top--small" style="font-size: .75rem;">
+					                <ui:inputNumber label="Number of Payments"
+					                              	labelClass=""
+					                              	class="slds-form-element__control slds-input"
+					                              	value="{!v.noOfPayments}"
+					                              	required="true"
+					                              />
+					            </div>
+
+					            <aura:if isTrue="{! v.showError }">
+			                      	<div class="slds-col slds-size--1-of-1">
+			                        	<div class="slds-form-element slds-m-top--medium">
+			                          		<div class="slds-col slds-size--1-of-1">
+			                            		<div class="slds-theme--error" role="dialog">
+			                              			<div class="slds-popover__body">{!v.errorMessage}</div>
+			                            		</div>
+			                          		</div>
+			                        	</div>
+			                      	</div>
+			                  	</aura:if>
+
+
+				            </aura:if>
+
+
+
+
+			                <aura:if isTrue="{!v.showSuccess}" >
+		                  		<div class="slds-col slds-size--1-of-1">
+		                    		<div class="slds-form-element">
+		                      			<div class="slds-col slds-size--1-of-1">
+		                        			<div class="slds-theme--success" role="dialog">
+		                          				<div class="slds-text-body--small slds-popover__body slds-align--absolute-center">Payments successfully created.</div>
+		                       				</div>
+		                      			</div>
+		                    		</div>
+		                  		</div>
+
+		              		</aura:if>
+
+
+
+				        </form>
+
+				    </article>
+
+				</div>
+
+			</div>
+     
+
+	
+
+	<div class="slds-form-element slds-p-top--small slds-text-align--right">
+
+		<aura:if isTrue="{!! v.showSuccess}">
+
+		    <lightning:button variant="neutral" label="Cancel" onclick="{! c.cancel }" />      
+		    <lightning:button variant="brand" label="Save" onclick="{! c.save }" />
+
+		</aura:if>
+
+		<aura:if isTrue="{!v.showSuccess}" >
+
+        	<lightning:button variant="brand" label="Close" onclick="{! c.cancel }" />
+        
+    	</aura:if>
+
+	</div>
+
+</aura:component>

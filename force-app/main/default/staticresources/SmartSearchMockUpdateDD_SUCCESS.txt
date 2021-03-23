@@ -1,0 +1,35 @@
+{
+    "data": {
+        "id": "847530",
+        "type": "due_diligence",
+        "attributes": {
+            "ddid": "847530",
+            "type": "business",
+            "name": "IBM",
+            "your_client": "no",
+            "dowjones_id": "847530",
+            "action": "added",
+            "action_date": "2020-12-31",
+            "active": true,
+            "sanction_types": [
+                "SIE"
+            ],
+            "auto_not_our_client_date": null,
+            "countries": [
+                "United States"
+            ],
+            "request_date": "2021-01-25",
+            "is_deleted": false
+        },
+        "links": {
+            "self": "https://sandbox-api.smartsearchsecure.com/due_diligence/2720942/3002055"
+        }
+    },
+    "meta": {
+        "reference": "57cef868-7390-473c-aaed-182402f6620f",
+        "timestamp": "2021-02-17T16:26:35+00:00",
+        "duration": 0.148,
+        "version": "2.2.1",
+        "notices": []
+    }
+}
